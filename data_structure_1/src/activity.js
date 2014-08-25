@@ -42,7 +42,12 @@ Activity.sycn_current_activity_to_activities = function (current_activity) {
 
 
 Activity.get_detail_of_current_activity = function(){
-    var activity_json = Activity.get_activities();
     var current_activity_name = Activity.get_current_activity();
-    return _(activity_json).findWhere({name:current_activity_name});
+    return Activity.find_activity_by_name(current_activity_name);
+};
+
+
+Activity.find_activity_by_name = function(activity_name){
+    var activities = Activity.get_activities();
+    return _(activities).findWhere({name:activity_name}) || {};
 };
