@@ -46,8 +46,6 @@ Activity.get_detail_of_current_activity = function(){
     return Activity.find_activity_by_name(current_activity_name);
 };
 
-
 Activity.find_activity_by_name = function(activity_name){
-    var activities = Activity.get_activities();
-    return _(activities).findWhere({name:activity_name}) || {};
+    return _(Activity.get_activities()).findWhere({name:activity_name}) || {};
 };
