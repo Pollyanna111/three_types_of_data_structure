@@ -1,6 +1,5 @@
 describe("Activity", function() {
 
-
     beforeEach(function() {
         init_activity_database();
     });
