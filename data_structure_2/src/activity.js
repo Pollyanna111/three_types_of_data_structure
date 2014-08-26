@@ -30,8 +30,7 @@ Activity.get_activity_id_generator = function(){
 };
 
 Activity.save_activity_id_generator = function () {
-    var activity_json = Activity.get_activities();
-    localStorage.activity_id_generator = _.keys(activity_json).length;
+    localStorage.activity_id_generator = Activity.get_activity_ids().length;
 };
 
 Activity.get_activities = function(){
@@ -63,4 +62,9 @@ Activity.sycn_current_activity_to_activities = function (current_activity) {
 Activity.get_detail_of_current_activity = function(){
     var activity_json = Activity.get_activities();
     return activity_json[localStorage.current_activity];
+};
+
+Activity.find_activity_by_name = function(activity_name){
+    var activity_json = Activity.get_activities();
+    return _(_(activity_json).values()).findWhere({name:activity_name});
 };
