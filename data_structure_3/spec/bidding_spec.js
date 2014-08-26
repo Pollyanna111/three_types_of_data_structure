@@ -9,7 +9,7 @@ describe("Bidding", function() {
         localStorage.current_activity = "1";
         localStorage.current_bid = "竞价1";
         localStorage.is_bidding = "";
-        localStorage.bids = JSON.stringify([{activity_id:'1',biddings:[],bid_id:'竞价1'}]);
+        localStorage.bids = JSON.stringify([{activity_id:'1',biddings:[],name:'竞价1'}]);
     });
 
     afterEach(function(){
