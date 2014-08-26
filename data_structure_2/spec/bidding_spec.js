@@ -31,14 +31,14 @@ describe("Bidding", function() {
                 }
         }];
         localStorage.activities = JSON.stringify(two_activities);
-        localStorage.current_activity_id = "1";
+        localStorage.current_activity = "1";
         localStorage.current_bid = "竞价1";
         localStorage.is_bidding = "";
     });
 
     afterEach(function(){
         localStorage.clear();
-    })
+    });
 
     it("should bid successfully when it is bidding and user has signed up", function(){
         var phone_no = "13600000000";
