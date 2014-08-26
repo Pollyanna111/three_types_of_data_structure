@@ -4,7 +4,7 @@ function Bidder(phone,price) {
 }
 
 var create_new_bid = function (activity_id){
-    var current_activity = Activity.get_current_activity_by_id(activity_id);
+    var current_activity = Activity.get_activity_by_id(activity_id);
     var bid_name = '竞价'+(current_activity.bids.length+1);
     current_activity.bids.push(bid_name);
     current_activity.biddings[bid_name] = [];
@@ -38,4 +38,14 @@ Bidder.bidder_not_sign = function(phone){
 Bidder.has_bade = function(phone){
     var current_activity = Activity.get_detail_of_current_activity();
     return _(current_activity.biddings[Bidder.get_current_bid()]).findWhere({phone:phone});
+};
+
+Bidder.get_all_bidders = function(activity_id,bid_name){
+    var activity = Activity.get_activity_by_id(activity_id);
+    return activity.biddings[bid_name];
+};
+
+Bidder.find_name_by_phone = function (activity_id,phone) {
+    var activity = Activity.get_activity_by_id(activity_id);
+    return _(activity.sign_ups).findWhere({phone:phone}).name;
 };
