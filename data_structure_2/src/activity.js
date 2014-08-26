@@ -6,18 +6,32 @@ function Activity(name,sign_ups,bids,biddings){
 }
 
 Activity.prototype.create = function(){
+    Activity.update_activity_ids();
+    Activity.save_current_activity();
+    Activity.update_activities(this);
+    Activity.save_activity_id_generator();
+};
+
+Activity.update_activities = function(activity){
     var activity_json = Activity.get_activities();
-    var activity_id = _.keys(activity_json).length;
-    Activity.update_activity_ids(activity_id);
-    Activity.save_current_activity(activity_id);
-    activity_json[activity_id] = this;
+    activity_json[Activity.get_activity_id_generator()] = activity;
     Activity.save_activities(activity_json);
 };
 
-Activity.update_activity_ids = function (activity_id) {
+
+Activity.update_activity_ids = function () {
     var activity_ids = Activity.get_activity_ids();
-    activity_ids.push(activity_id);
+    activity_ids.push(Activity.get_activity_id_generator());
     Activity.save_activity_ids(activity_ids);
+};
+
+Activity.get_activity_id_generator = function(){
+    return localStorage.activity_id_generator || 0;
+};
+
+Activity.save_activity_id_generator = function () {
+    var activity_json = Activity.get_activities();
+    localStorage.activity_id_generator = _.keys(activity_json).length;
 };
 
 
@@ -37,6 +51,6 @@ Activity.get_activity_ids = function(){
     return JSON.parse(localStorage.activity_ids) || [];
 };
 
-Activity.save_current_activity = function (activity_id) {
-    localStorage.current_activity = activity_id;
+Activity.save_current_activity = function () {
+    localStorage.current_activity = Activity.get_activity_id_generator();
 };
