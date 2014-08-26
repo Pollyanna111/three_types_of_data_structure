@@ -25,7 +25,7 @@ Activity.save_activities = function(activities){
 };
 
 Activity.get_current_activity = function(){
-    return JSON.parse(localStorage.current_activity);
+    return localStorage.current_activity;
 };
 
 Activity.save_current_activity = function(activity_id){
@@ -39,4 +39,14 @@ Activity.get_activity_id_generator = function () {
 Activity.save_activity_id_generator = function(){
     var activities = Activity.get_activities();
     localStorage.activity_id_generator = activities.length.toString();
+};
+
+
+Activity.get_detail_of_current_activity = function(){
+    var current_activity_id = Activity.get_current_activity();
+    return Activity.find_activity_by_id(current_activity_id);
+};
+
+Activity.find_activity_by_id = function(activity_id){
+    return _(Activity.get_activities()).findWhere({id:activity_id});
 };
