@@ -34,7 +34,6 @@ Activity.save_activity_id_generator = function () {
     localStorage.activity_id_generator = _.keys(activity_json).length;
 };
 
-
 Activity.get_activities = function(){
     return JSON.parse(localStorage.activities) || {};
 };
@@ -53,4 +52,15 @@ Activity.get_activity_ids = function(){
 
 Activity.save_current_activity = function () {
     localStorage.current_activity = Activity.get_activity_id_generator();
+};
+
+Activity.sycn_current_activity_to_activities = function (current_activity) {
+    var activity_json = Activity.get_activities();
+    activity_json[localStorage.current_activity] = current_activity;
+    Activity.save_activities(activity_json);
+};
+
+Activity.get_detail_of_current_activity = function(){
+    var activity_json = Activity.get_activities();
+    return activity_json[localStorage.current_activity];
 };

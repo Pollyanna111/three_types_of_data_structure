@@ -4,13 +4,13 @@ describe("SignUp", function() {
     beforeEach(function() {
         init_activity_database();
         init_two_activity();
-        localStorage.current_activity_id = "1";
+        localStorage.current_activity = "1";
         localStorage.is_signing_up = "";
     });
 
     afterEach(function(){
         localStorage.clear();
-    })
+    });
 
 
     it("should one sms with signing up content sign up successfully when it is signing up", function(){
