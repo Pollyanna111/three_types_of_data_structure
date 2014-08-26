@@ -13,13 +13,13 @@ describe("Bid", function() {
         };
         activities["0"] = activity;
         localStorage.activities = JSON.stringify(activities);
-        localStorage.current_activity_id = "0";
+        localStorage.current_activity = "0";
         localStorage.is_bidding = "";
     });
 
     afterEach(function(){
         localStorage.clear();
-    })
+    });
 
     it("should create new bid", function(){
         create_new_bid("0");
